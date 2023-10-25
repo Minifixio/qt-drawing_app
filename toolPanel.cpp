@@ -11,13 +11,6 @@
 ToolPanel::ToolPanel(QWidget *parent)
     : QWidget{parent}
 {
-    // Groupe de boutons radio pour sélectionner le type de dessin
-    QGroupBox* drawingTypeGroup = new QGroupBox("Type de dessin", this);
-    QRadioButton* lineRadioButton = new QRadioButton("Ligne", this);
-    QRadioButton* shapeRadioButton = new QRadioButton("Formes", this);
-    QButtonGroup* drawingTypeButtonGroup = new QButtonGroup(this);
-    drawingTypeButtonGroup->addButton(lineRadioButton);
-    drawingTypeButtonGroup->addButton(shapeRadioButton);
 
     // Groupe de boutons radio pour sélectionner le style de la ligne
     QGroupBox* lineStyleGroup = new QGroupBox("Style de ligne", this);
@@ -27,8 +20,48 @@ ToolPanel::ToolPanel(QWidget *parent)
     lineStyleButtonGroup->addButton(solidRadioButton);
     lineStyleButtonGroup->addButton(dashedRadioButton);
 
-    lineRadioButton->setChecked(true);
     solidRadioButton->setChecked(true);
+
+    // Créez un groupe de boutons radio pour sélectionner la forme
+    QGroupBox* shapeGroup = new QGroupBox("Forme", this);
+    QRadioButton* lineRadioButton = new QRadioButton("Ligne",this);
+    QRadioButton* rectangleRadioButton = new QRadioButton("Rectangle", this);
+    QRadioButton* triangleRadioButton = new QRadioButton("Triangle", this);
+    QRadioButton* ellipseRadioButton = new QRadioButton("Ellipse",this);
+    QButtonGroup* shapeButtonGroup = new QButtonGroup(this);
+    shapeButtonGroup->addButton(lineRadioButton,0);
+    shapeButtonGroup->addButton(rectangleRadioButton,1);
+    shapeButtonGroup->addButton(triangleRadioButton,2);
+    shapeButtonGroup->addButton(ellipseRadioButton,3);
+
+    // Appliquez une feuille de style pour augmenter la taille des icônes
+    QString iconSizeStyle = "QRadioButton::indicator { width: 32px; height: 32px; }";
+    lineRadioButton->setStyleSheet(iconSizeStyle);
+    rectangleRadioButton->setStyleSheet(iconSizeStyle);
+    triangleRadioButton->setStyleSheet(iconSizeStyle);
+    ellipseRadioButton->setStyleSheet(iconSizeStyle);
+
+    // Créez des icônes pour chaque forme (remplacez les chemins d'accès par les vôtres)
+    QIcon lineIcon(":/tools/line.png");
+    QIcon rectangleIcon(":/tools/rectangle.png");
+    QIcon triangleIcon(":/tools/triangle.png");
+    QIcon ellipseIcon(":/tools/ellipse.png");
+
+    // Définissez les icônes pour les boutons radio
+    lineRadioButton->setIcon(lineIcon);
+    rectangleRadioButton->setIcon(rectangleIcon);
+    triangleRadioButton->setIcon(triangleIcon);
+    ellipseRadioButton->setIcon(ellipseIcon);
+
+    // Créez un layout pour organiser les boutons radio
+    QVBoxLayout* shapeLayout = new QVBoxLayout;
+    shapeLayout->addWidget(lineRadioButton);
+    shapeLayout->addWidget(rectangleRadioButton);
+    shapeLayout->addWidget(triangleRadioButton);
+    shapeLayout->addWidget(ellipseRadioButton);
+    shapeGroup->setLayout(shapeLayout);
+
+    lineRadioButton->setChecked(true);
 
     // Slider pour sélectionner l'épaisseur du trait
     QSlider* thicknessSlider = new QSlider(Qt::Horizontal, this);
@@ -45,12 +78,6 @@ ToolPanel::ToolPanel(QWidget *parent)
     QVBoxLayout* layout = new QVBoxLayout(this);
     layout->setAlignment(Qt::AlignCenter);
 
-    // Ajout des boutons radio au groupe de sélection de type de dessin
-    QVBoxLayout* drawingTypeLayout = new QVBoxLayout(drawingTypeGroup);
-    drawingTypeLayout->addWidget(lineRadioButton);
-    drawingTypeLayout->addWidget(shapeRadioButton);
-    drawingTypeGroup->setLayout(drawingTypeLayout);
-
     // Ajout des boutons radio au groupe de sélection de style de ligne
     QVBoxLayout* lineStyleLayout = new QVBoxLayout(lineStyleGroup);
     lineStyleLayout->addWidget(solidRadioButton);
@@ -64,18 +91,44 @@ ToolPanel::ToolPanel(QWidget *parent)
     colorDisplay->setStyleSheet("background-color: black;"); // Noir par défaut
 
     // Ajout les widgets au layout principal
-    layout->addWidget(drawingTypeGroup);
     layout->addWidget(lineStyleGroup);
+    layout->addLayout(thicknessLayout);
     layout->addWidget(colorButton);
     layout->addWidget(colorDisplay);
-    layout->addLayout(thicknessLayout);
+    layout->addWidget(shapeGroup);
 
     connect(colorButton, &QPushButton::clicked, this, &ToolPanel::chooseColor);
     connect(thicknessSlider, &QSlider::valueChanged, this, &ToolPanel::handleThicknessChanged);
-
     connect(dashedRadioButton, &QRadioButton::toggled, this, &ToolPanel::handleLineStyleChanged);
+    connect(shapeButtonGroup, &QButtonGroup::idClicked, this, &ToolPanel::selectShape);
 
     setLayout(layout);
+}
+
+void ToolPanel::selectShape(int shapeId)
+{
+    qDebug() << "Shape id selected :" <<shapeId;
+
+    switch(shapeId) {
+    case 0:
+        currentShape = Line;
+        emit shapeSelected(currentShape);
+        break;
+    case 1:
+        currentShape = Rectangle;
+        emit shapeSelected(currentShape);
+        break;
+    case 2:
+        currentShape = Triangle;
+        emit shapeSelected(currentShape);
+        break;
+    case 3:
+        currentShape = Ellipse;
+        emit shapeSelected(currentShape);
+        break;
+    default:
+        qDebug() << "Shape id selected is wrong :" <<shapeId;
+    }
 }
 
 void ToolPanel::handleThicknessChanged(int thickness)

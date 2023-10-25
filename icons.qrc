@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/tools">
+        <file>ellipse.png</file>
+        <file>line.png</file>
+        <file>rectangle.png</file>
+        <file>triangle.png</file>
+    </qresource>
+</RCC>

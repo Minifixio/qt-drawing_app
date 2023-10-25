@@ -8,7 +8,9 @@
 
 class CustomLine
 {
+
 public:
+    CustomLine();
     CustomLine(const QLine& line, int thickness, const QColor& color, const Qt::PenStyle lineStyle);
     QLine line;
     int thickness;

@@ -2,15 +2,17 @@
 #define DRAWINGPANEL_H
 
 #include <CustomLine.h>
+#include <CustomShape.h>
 #include <QFrame>
 #include <QWidget>
 #include <ToolPanel.h>
+#include <editingState.h>
 
 class DrawingPanel : public QFrame
 {
     Q_OBJECT
 public:
-    explicit DrawingPanel(ToolPanel& toolPanel, QWidget *parent = nullptr);
+    explicit DrawingPanel(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *event) override;
 
 signals:
@@ -21,18 +23,40 @@ protected:
     void mouseReleaseEvent(QMouseEvent *event) override;
 
 private:
-    ToolPanel& toolPanel;
-    int lineThickness;
-    QColor lineColor;
-    Qt::PenStyle lineStyle;
-    QVector<CustomLine> lines; // Pour stocker les lignes dessinées
-    QLine currentLine; // Pour stocker la ligne en cours de dessin
+    int outlineThickness;
+    QColor outlineColor;
+    QColor fillColor;
+    Qt::PenStyle outlineStyle;
+
+    int selectedShapeIndex;
+    bool isShapeSelected = false;
+
+    EditingState editingState = EditingState::Drawing;
+
+    ShapeType currentShapeType;
+    QVector<CustomShape> shapes;
+    CustomShape currentShape;
+
     bool isDrawing; // Variable pour suivre si l'utilisateur est en train de dessiner
+    bool isResizing; // Variable pour suivre si l'utilisateur est en train de redimensionner une forme
+    bool isMoving;
+
+    QPoint lastMovingAnchor;
 
 public slots:
     void setThickness(int thickness);
     void setColor(const QColor& color);
-    void updateLineStyle(Qt::PenStyle style);
+    void setLineStyle(Qt::PenStyle style);
+    void setShapeSelected(ShapeType shape);
+    void fillShape();
+    void eraseAll();
+    void undo();
+
+    void risizingMode();
+    void movingMode();
+private slots:
+    //void on_spinbox1_valueChanged(int value);
+    //void on_spinbox2_valueChanged(int value);
 };
 
 #endif // DRAWINGPANEL_H
