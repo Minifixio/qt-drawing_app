@@ -20,11 +20,14 @@ public:
 private:
     Ui::Main *ui;
 
+protected:
+    void closeEvent(QCloseEvent *event) override;
+
 private slots:
     void on_shapeSelectEllipseBtn_clicked();
     void on_shapeSelectRectangleBtn_clicked();
     void on_shapeSelectLineBtn_clicked();
-    void on_shapeSelectTriangleBtn_clicked();
+    //void on_shapeSelectTriangleBtn_clicked();
 
     void on_chooseColorBtn_clicked();
 

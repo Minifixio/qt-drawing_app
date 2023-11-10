@@ -4,6 +4,8 @@
 #include <QVBoxLayout>
 #include <ToolPanel.h>
 #include "toolPanel.h"
+#include <QMessageBox>
+#include <QCloseEvent>
 
 Main::Main(QWidget *parent)
     : QMainWindow(parent)
@@ -19,9 +21,9 @@ void Main::on_shapeSelectEllipseBtn_clicked() {
 void Main::on_shapeSelectRectangleBtn_clicked() {
     ui->drawingPanel->setShapeSelected(ShapeType::Rectangle);
 }
-void Main::on_shapeSelectTriangleBtn_clicked() {
-    ui->drawingPanel->setShapeSelected(ShapeType::Triangle);
-}
+// void Main::on_shapeSelectTriangleBtn_clicked() {
+//     ui->drawingPanel->setShapeSelected(ShapeType::Triangle);
+// }
 void Main::on_shapeSelectLineBtn_clicked() {
     ui->drawingPanel->setShapeSelected(ShapeType::Line);
 }
@@ -65,6 +67,21 @@ void Main::chooseColor()
     {
         ui->drawingPanel->setColor(selectedColor);
         ui->colorDisplayFrame->setStyleSheet(QString("background-color: %1;").arg(selectedColor.name()));
+    }
+}
+
+void Main::closeEvent(QCloseEvent *event) {
+    QMessageBox::StandardButton reply = QMessageBox::question(
+        this,
+        "Confirmation",
+        "Etes-vous sur de vouloir quitter ?",
+        QMessageBox::Yes | QMessageBox::No
+        );
+
+    if (reply == QMessageBox::Yes) {
+        event->accept(); // Close the application
+    } else {
+        event->ignore(); // Do not close the application
     }
 }
 

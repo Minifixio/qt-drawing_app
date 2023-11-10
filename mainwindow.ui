@@ -117,7 +117,7 @@
                 <item>
                  <widget class="QGroupBox" name="groupBox_color">
                   <property name="title">
-                   <string>Couleur</string>
+                   <string>Couleur courante</string>
                   </property>
                   <layout class="QVBoxLayout" name="verticalLayout_5">
                    <property name="leftMargin">
@@ -158,7 +158,7 @@
                    <item>
                     <widget class="QPushButton" name="fillColorBtn">
                      <property name="text">
-                      <string>Remplir</string>
+                      <string>Remplir la forme</string>
                      </property>
                     </widget>
                    </item>
@@ -277,7 +277,9 @@
               <bool>false</bool>
              </property>
              <property name="styleSheet">
-              <string notr="true">border: 5px solid black;</string>
+              <string notr="true">border: 5px solid black;
+background: linen;
+border-radius: 5px;</string>
              </property>
              <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
@@ -320,7 +322,7 @@
           <number>5</number>
          </property>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_shapeSelect" stretch="1,1,1,1">
+          <layout class="QHBoxLayout" name="horizontalLayout_shapeSelect" stretch="1,1,1">
            <item>
             <widget class="QPushButton" name="shapeSelectLineBtn">
              <property name="sizePolicy">
@@ -378,29 +380,15 @@
              </property>
             </widget>
            </item>
-           <item>
-            <widget class="QPushButton" name="shapeSelectTriangleBtn">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>1</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>Triangle</string>
-             </property>
-             <property name="icon">
-              <iconset resource="icons.qrc">
-               <normaloff>:/tools/triangle.png</normaloff>:/tools/triangle.png</iconset>
-             </property>
-            </widget>
-           </item>
           </layout>
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
             <widget class="QPushButton" name="resizeBtn">
+             <property name="toolTip">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Cliquez sur une figure pour la sélectionner puis la redimensionner à l'aide des carrés bleus dans les angles.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
              <property name="text">
               <string>Redimensionner</string>
              </property>
@@ -408,6 +396,9 @@
            </item>
            <item>
             <widget class="QPushButton" name="moveBtn">
+             <property name="toolTip">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Cliquez sur une figure pour la sélectionner puis la déplacer en la maintenant avec la souris.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
              <property name="text">
               <string>Déplacer</string>
              </property>
