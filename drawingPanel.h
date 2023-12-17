@@ -5,7 +5,6 @@
 #include <CustomShape.h>
 #include <QFrame>
 #include <QWidget>
-#include <ToolPanel.h>
 #include <editingState.h>
 
 class DrawingPanel : public QFrame
@@ -37,9 +36,9 @@ private:
     QVector<CustomShape> shapes;
     CustomShape currentShape;
 
-    bool isDrawing; // Variable pour suivre si l'utilisateur est en train de dessiner
-    bool isResizing; // Variable pour suivre si l'utilisateur est en train de redimensionner une forme
-    bool isMoving;
+    bool isDrawing = false; // Variable pour suivre si l'utilisateur est en train de dessiner
+    bool isResizing = false; // Variable pour suivre si l'utilisateur est en train de redimensionner une forme
+    bool isMoving = false;
 
     QPoint lastMovingAnchor;
 

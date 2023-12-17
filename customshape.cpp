@@ -118,7 +118,7 @@ void CustomShape::drawResizeHandle(QPainter &painter) {
 
 void CustomShape::updateResizeHandle()
 {
-    int handleSize = 6; // Taille des poignées de redimensionnement
+    int handleSize = 10; // Taille des poignées de redimensionnement
 
     if (shapeType == ShapeType::Rectangle) {
         resizeHandleTopLeft = QRect(rect.topLeft(), QSize(handleSize, handleSize));

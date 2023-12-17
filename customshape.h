@@ -6,7 +6,7 @@
 #include <QPolygon>
 #include <QRect>
 #include <ShapeType.h>
-#include <QPainter.h>
+#include <QPainter>
 #include <resizeHandle.h>
 
 class CustomShape

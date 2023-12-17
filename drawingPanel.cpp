@@ -103,8 +103,6 @@ void DrawingPanel::mousePressEvent(QMouseEvent *event)
             bool isOnResizeHandle = shapes[selectedShapeIndex].selectResizeHandle(event->pos());
 
             if (isOnResizeHandle) {
-                qDebug() << "Redimensionnement";
-
                 isResizing = true;
                 return;
             }
@@ -122,7 +120,6 @@ void DrawingPanel::mousePressEvent(QMouseEvent *event)
                 // La forme a été cliquée, la sélectionner
                 isShapeSelected = true;
                 selectedShapeIndex = i;
-                qDebug() << "Forme sélectionnée : " << shapes[selectedShapeIndex].typeToString();
 
                 // Redessiner pour montrer la sélection
                 update();
@@ -133,7 +130,6 @@ void DrawingPanel::mousePressEvent(QMouseEvent *event)
                 // La forme a été cliquée, la sélectionner
                 isShapeSelected = true;
                 selectedShapeIndex = i;
-                qDebug() << "Forme sélectionnée : " << shapes[selectedShapeIndex].typeToString();
 
                 // Redessiner pour montrer la sélection
                 update();
@@ -144,7 +140,6 @@ void DrawingPanel::mousePressEvent(QMouseEvent *event)
                 // La forme a été cliquée, la sélectionner
                 isShapeSelected = true;
                 selectedShapeIndex = i;
-                qDebug() << "Forme sélectionnée : " << shapes[selectedShapeIndex].typeToString();
 
                 // Redessiner pour montrer la sélection
                 update();
@@ -152,7 +147,6 @@ void DrawingPanel::mousePressEvent(QMouseEvent *event)
 
             if (isShapeSelected) {
                 if (editingState == EditingState::Moving) {
-                    qDebug() << "Mouvement : " << shapes[selectedShapeIndex].typeToString();
                     isMoving = true;
                     lastMovingAnchor = event->pos();
                     this->setCursor(Qt::ClosedHandCursor);
