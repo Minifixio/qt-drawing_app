@@ -9,22 +9,18 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    customLine.cpp \
     customShape.cpp \
     drawingPanel.cpp \
     main.cpp \
-    mainwindow.cpp \
-    toolPanel.cpp
+    mainwindow.cpp
 
 HEADERS += \
-    customLine.h \
     customShape.h \
     drawingPanel.h \
     editingState.h \
     mainwindow.h \
     resizeHandle.h \
-    shapeType.h \
-    toolPanel.h
+    shapeType.h
 
 FORMS += \
     drawingPanel.ui \
@@ -36,7 +32,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    Roadmap.md
+    README.md \
+    screenshot-1.png
 
 RESOURCES += \
     icons.qrc

@@ -2,10 +2,9 @@
 #include "ui_mainwindow.h"
 #include "drawingPanel.h"
 #include <QVBoxLayout>
-#include <ToolPanel.h>
-#include "toolPanel.h"
 #include <QMessageBox>
 #include <QCloseEvent>
+#include <QColorDialog>
 
 Main::Main(QWidget *parent)
     : QMainWindow(parent)
@@ -21,9 +20,6 @@ void Main::on_shapeSelectEllipseBtn_clicked() {
 void Main::on_shapeSelectRectangleBtn_clicked() {
     ui->drawingPanel->setShapeSelected(ShapeType::Rectangle);
 }
-// void Main::on_shapeSelectTriangleBtn_clicked() {
-//     ui->drawingPanel->setShapeSelected(ShapeType::Triangle);
-// }
 void Main::on_shapeSelectLineBtn_clicked() {
     ui->drawingPanel->setShapeSelected(ShapeType::Line);
 }

@@ -3,7 +3,6 @@
 
 #include <DrawingPanel.h>
 #include <QMainWindow>
-#include <ToolPanel.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Main; }
